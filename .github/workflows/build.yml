@@ -1,0 +1,28 @@
+name: build and test
+on: [ push, pull_request ]
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: commands => run maven
+        run: |
+          pwd
+          ls -l
+          cd $GITHUB_WORKSPACE/heros
+          echo "---------------"
+          ls -l
+          df -h
+          set
+          mvn -q clean compile
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name : check test
+        run : |
+          cd $GITHUB_WORKSPACE/heros
+          mvn -q clean compile test
+
